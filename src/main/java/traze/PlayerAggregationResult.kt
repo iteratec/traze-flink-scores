@@ -1,6 +1,6 @@
 package traze
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper
 
 data class PlayerAggregationResult(
         var scores: HashMap<String, Int> = hashMapOf()

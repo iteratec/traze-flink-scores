@@ -16,6 +16,9 @@ import java.util.Arrays
 import java.util.Properties
 import org.apache.flink.api.java.utils.ParameterTool
 import org.slf4j.LoggerFactory
+import com.sun.org.glassfish.external.amx.AMXUtil.prop
+
+
 
 
 object TrazeDataAnalysis {
@@ -35,7 +38,7 @@ object TrazeDataAnalysis {
         val env = StreamExecutionEnvironment.createLocalEnvironment()
 
         val properties = Properties()
-        properties.load(FileInputStream("src/main/resources/mqtt.properties"))
+        properties.load(this.javaClass.getResourceAsStream("/mqtt.properties"))
 
         val sourceProperties = Properties()
         sourceProperties.setProperty(MQTTSource.CLIENT_ID, properties.getProperty("client_id"))
