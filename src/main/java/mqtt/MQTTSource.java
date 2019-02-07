@@ -60,7 +60,7 @@ public class MQTTSource implements SourceFunction<String>, StoppableFunction {
 
         connectOptions.setAutomaticReconnect(true);
 
-        client = new MqttClient(properties.getProperty(URL), properties.getProperty(CLIENT_ID));
+        client = new MqttClient(properties.getProperty(URL), properties.getProperty(CLIENT_ID), null);
         client.connect(connectOptions);
 
         client.subscribe(properties.getProperty(MQTTSource.TOPIC), (topic, message) -> {
