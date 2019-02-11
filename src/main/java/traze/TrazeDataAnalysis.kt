@@ -11,14 +11,11 @@ import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeW
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.util.Collector
 
-import java.io.FileInputStream
 import java.util.Arrays
 import java.util.Properties
 import org.apache.flink.api.java.utils.ParameterTool
 import org.slf4j.LoggerFactory
-import com.sun.org.glassfish.external.amx.AMXUtil.prop
-
-
+import org.apache.flink.api.common.restartstrategy.RestartStrategies
 
 
 object TrazeDataAnalysis {
@@ -69,6 +66,10 @@ object TrazeDataAnalysis {
                 .addSink(MQTTSink(sinkProperties))
                 //.print()
 
+        env.restartStrategy = RestartStrategies.fixedDelayRestart(
+                1000000,
+                org.apache.flink.api.common.time.Time.seconds(10)
+        )
         env.execute("TrazeDataAnalysis")
     }
 
